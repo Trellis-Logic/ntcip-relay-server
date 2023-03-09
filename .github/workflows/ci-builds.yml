@@ -1,0 +1,23 @@
+name: ntcip-server
+
+on:
+  push:
+  pull_request:
+  release:
+    types: [created]
+
+jobs:
+  # Run unit-tests on all branches and releases
+  unit-tests:
+    container: python:3.10-bullseye
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Install apt packages
+        run: apt-get update && apt-get install -y python3 python3-pip libsnmp-dev
+      - name: Install python requirements
+        run: pip3 install -r requirements.txt
+      - name: Install python app
+        run: pip3 install -e src
+      - name: Run unittests
+        run: python3 -m unittest discover -s src/tests

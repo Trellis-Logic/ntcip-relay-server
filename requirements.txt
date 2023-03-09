@@ -1,0 +1,4 @@
+MarkUpSafe>=2.1.1
+Flask>=1.1.2
+easysnmp>=0.2.5
+Jinja2>=2.11.3
