@@ -94,11 +94,11 @@ def update_pedcall(session, mib, phase_control_group, phase, enable_true):
 def pedcall_set(mib, phase_control_group, phase, enable_true, timeout_seconds):
     session = Session()
     logging.debug(f"Request:"
-                  f"mib: {mib}"
-                  f"phase_control_group: {phase_control_group}"
-                  f"phase: {phase}"
-                  f"enable-true: {enable_true}"
-                  f"timeout: {timeout_seconds}")
+                  f"mib: {mib} "
+                  f"phase_control_group: {phase_control_group} "
+                  f"phase: {phase} "
+                  f"enable-true: {enable_true} "
+                  f"timeout: {timeout_seconds} ")
     try:
         PedcallCallbacks.update_callback(mib, phase_control_group, phase, not enable_true, timeout_seconds, session)
         value = update_pedcall(session, mib, phase_control_group, phase, enable_true)

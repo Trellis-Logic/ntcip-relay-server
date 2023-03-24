@@ -6,9 +6,8 @@ Server.
 Given this config.json:
 ```
 {
-    "pedcall_oid": "1.2.3.4"
     "ntcip_controller_ip": "192.168.88.1",
-    "ntcip_controller_port": "5501",
+    "ntcip_controller_port": "501",
     "ntcip_community": "administrator",
     "ntcip_version": 1,
     "http_server_port": 8080
@@ -20,17 +19,21 @@ and port 5501.
 
 Operations will be performed on the oid specified at "1.2.3.4".  A curl command formatted like this:
 ```
-curl -X POST -F "phase_control_group=1" -F 'phase=1' -F 'signal_type=True' -F "mib=1.2.3.4" http://localhost:8080/pedcall/
+curl -X POST http://localhost:8080/pedcall/ \
+  -H 'Content-Type: application/json' \
+  -d '{ "activate" : true, "phase_control_group" : 1, "phase" : 1, "mib" : "1.3.6.1.4.1.1206.4.2.1.1.5.1.7" }'
 ```
-will result in an integer 1 value set on the mib at 1.2.3.4.1, and a command formatted like this:
+will result in an integer 1 value (phase bit 1) set on the mib at 1.3.6.1.4.1.1206.4.2.1.1.5.1.7.1, and a command formatted like this:
 ```
-curl -X POST -F "phase_control_group=1" -F 'phase=1' -F 'signal_type=False' -F "mib=1.2.3.4" http://localhost:8080/pedcall/
+curl -X POST http://localhost:8080/pedcall/ \
+  -H 'Content-Type: application/json' \
+  -d '{ "activate" : false, "phase_control_group" : 1, "phase" : 1, "mib" : "1.3.6.1.4.1.1206.4.2.1.1.5.1.7" }'
 ```
-will result in an integer 0 value set on the mib at 1.2.3.4.1
+will result in an cleared phase phase bit 1 value on the mib at 1.3.6.1.4.1.1206.4.2.1.1.5.1.7.1
 
 To verify, you may query with a command like this:
 ```
-snmpwalk -v2c -c administrator localhost:5501 1.2.3.4
+snmpwalk -v2c -c administrator localhost:501 1.3.6.1.4.1.1206.4.2.1.1.5.1.7.1
 ```
 
 ## Building and running with docker

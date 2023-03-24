@@ -1,6 +1,7 @@
 import easysnmp
 from ntcip_relay_server.config import Config
 from threading import Lock
+import logging
 
 
 class Session:
@@ -14,6 +15,7 @@ class Session:
             community=Config.NTCIP_COMMUNITY,
             version=Config.NTCIP_VERSION
         )
+        logging.info(f"Started SNMP session with {Config.to_json()}")
 
     def close(self):
         del self.snmp_session

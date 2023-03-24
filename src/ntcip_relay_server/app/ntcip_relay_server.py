@@ -4,6 +4,7 @@ from flask import Flask
 from ntcip_relay_server import endpoint
 from ntcip_relay_server.config import DEFAULT_CONFIG_LOCATION, Config
 import argparse
+import logging
 
 app = Flask(__name__)
 app.register_blueprint(endpoint.pedcall_api, url_prefix="/pedcall")
@@ -27,6 +28,8 @@ def cmdline():
 
     if args.debug:
         logging.basicConfig(level=logging.DEBUG)
+    else:
+        logging.basicConfig(level=logging.INFO)
 
     app.run(host='0.0.0.0', port=Config.HTTP_SERVER_PORT, debug=args.debug)
 
