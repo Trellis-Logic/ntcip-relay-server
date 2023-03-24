@@ -4,5 +4,5 @@ echo "Please login using"
 echo "export CR_PAT=YOUR_TOKEN"
 echo "echo \$CR_PAT | docker login ghcr.io -u USERNAME --password-stdin"
 echo "before calling this script"
-$(dirname $0)/build.sh --push
+$(dirname $0)/build.sh --platform linux/arm64/v8 --platform linux/amd64 --push
 
