@@ -33,6 +33,9 @@ To verify, you may query with a command like this:
 snmpwalk -v2c -c administrator localhost:5501 1.2.3.4
 ```
 
+Note that phase values are defined slightly different than the NTCIP convention and specify bits to set rather than
+the ultimate phase value.  A phase value of 4 means bit 3 is set which corresponds to actual phase value 8.
+
 ## Building and running with docker
 
 Run `./docker/build.sh` to build followed by `./docker/run.sh`
